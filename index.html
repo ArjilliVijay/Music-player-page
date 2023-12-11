@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Music Player </title>
+    <link rel="stylesheet " href="style.css ">
+    <script src="https://kit.fontawesome.com/be198bb3de.js" crossorigin="anonymous"></script>
+</head>
+<body>
+        <div class="container">
+       <div class="music-player">
+<img src="D:\media\images.jpeg" class="song-img">
+<h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: #ffffff; size: 100px;">Vijay</h1>
+
+<audio  id="song">
+    <source src="D:\media\roa-music-walk-around(chosic.com).mp3" type="audio/mpeg">
+</audio>
+
+<input type="range" value="0" id="progress">
+
+
+
+<div class="controls">
+<div><i class="fa-solid fa-backward"></i></div>
+<div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlicon"></i></div>
+<div><i class="fa-solid fa-forward"></i></div>
+</div>
+<script>
+    let progress=document.getElementById("progress");
+    let song=document.getElementById("song");
+    let ctrlicon=document.getElementById("ctrlicon");
+
+     song.onloadedmetadata = function(){
+        progress.max =song.duration;
+        progress.value =song.currentTime;
+
+     }
+     function playPause(){
+       if(ctrlicon.classList.contains("fa-pause")) {
+        song.pause();
+        ctrlicon.classList.remove("fa-pause");
+        ctrlicon.classList.remove("fa-play");
+       }
+       else{
+        song.play();
+        ctrlicon.classList.add("fa-pause");
+        ctrlicon.classList.remove("fa-play");
+       }
+     }
+     if(song.play()){
+        setInterval(()=>{
+            progress.value = song.currentTime;
+        },500);
+     }
+     progress.onchange=function(){
+        song.play();
+        song.currentTime=progress.value;
+        ctrlicon.classList.add("fa-pause");
+        ctrlicon.classList.remove("fa-play");
+     }
+
+</script>
+
+</body>
+</html>
